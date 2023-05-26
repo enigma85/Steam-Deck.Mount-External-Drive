@@ -17,19 +17,19 @@ function mount_drive () {
     echo "No label using UUID"
   fi
 
-  mkdir -p "/run/media/deck/$label"
-  chown deck:deck "/run/media/deck"
-  chown deck:deck "/run/media/deck/$label"
+  mkdir -p "/run/media/nazo/$label"
+  chown nazo:nazo "/run/media/nazo"
+  chown nazo:nazo "/run/media/nazo/$label"
 
-  #TODO: Check /run/media/deck/$label exists
+  #TODO: Check /run/media/nazo/$label exists
   if [ "$fs_type" = "ntfs" ]; then
     #TODO: Better default options
     echo "Attempting Mounting lowntfs-3g"
-    mount.lowntfs-3g "$1" "/run/media/deck/$label" -ouid=1000,gid=1000,user
+    mount.lowntfs-3g "$1" "/run/media/nazo/$label" -ouid=1000,gid=1000,user
   else
     #TODO: Better default options
     echo "Attempting Mounting $fs_type"
-    mount "$1" "/run/media/deck/$label"
+    mount "$1" "/run/media/nazo/$label"
   fi
 
 # From https://gist.github.com/HazCod/da9ec610c3d50ebff7dd5e7cac76de05
@@ -40,7 +40,7 @@ urlencode()
 
   mount_point="$(lsblk -noMOUNTPOINT $1)"
   if [ -z "$mount_point" ];then
-    echo "Failed to mount "$1" at /run/media/deck/$label"
+    echo "Failed to mount "$1" at /run/media/nazo/$label"
   else
     echo "Mounted "$1" at $mount_point"
     mount_point="$mount_point/SteamLibrary"
